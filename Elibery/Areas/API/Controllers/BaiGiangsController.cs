@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Elibery.Models;
 using Elibery.Data;
 
-namespace Elibery.Areas.APIB
+namespace Elibery.Areas.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
