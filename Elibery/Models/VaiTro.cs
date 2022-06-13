@@ -15,7 +15,9 @@ namespace Elibery.Models
         [Display(Name = "Mô tả")]
         public string MoTa { get; set; }
         public int idQuyen { get; set; }
-        public string ThongBao { get; set; }
+        public string? ThongBao { get; set; }
+        public DateTime? NgayCapNhatCuoi { get; set; }
+        public List< ApplicationUser> User { get; set; }
         public PhanQuyen phanQuyen { get; set; }
 
     }

@@ -7,7 +7,7 @@ using Elibery.Data;
 
 namespace Elibery.Areas.API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     public class VaiTroesController : ControllerBase
     {
@@ -75,6 +75,8 @@ namespace Elibery.Areas.API.Controllers
         [HttpPost]
         public async Task<ActionResult<VaiTro>> PostVaiTro([FromBody] VaiTro vaiTro)
         {
+            vaiTro.NgayCapNhatCuoi = DateTime.Now;
+
             _context.VaiTro.Add(vaiTro);
             await _context.SaveChangesAsync();
 

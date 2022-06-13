@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Elibery.Areas.API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     public class MonHocController : ControllerBase
     {

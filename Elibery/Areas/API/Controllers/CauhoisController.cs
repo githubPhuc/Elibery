@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 namespace Elibery.Areas.API.Controllers
 {
     //[Authorize(Roles = "User")]
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     public class CauhoisController : ControllerBase
     {

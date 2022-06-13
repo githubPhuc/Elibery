@@ -13,7 +13,7 @@ using Elibery.Models;
 
 namespace Elibery.Areas.API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     public class TepsController : ControllerBase
     {
@@ -65,56 +65,56 @@ namespace Elibery.Areas.API.Controllers
 
         // PUT: api/Teps/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        //[HttpPut]
-        //[Route("suatep")]
-        //public async Task<IActionResult> PutTep(int id, [FromForm] Tep tep,IFormFile formFile)
-        //{
-        //    if (id != tep.Id)
-        //    {
-        //        return BadRequest();
-        //    }
-        //    if (formFile != null)
-        //    {
-        //        var data = await _context.Tep.FindAsync(id);
-        //        var name =data.TenTep ;
-        //        var fileToDelete = Path.Combine(_webHostEnvironment.WebRootPath, "file",  name);
-        //        FileInfo file = new FileInfo(fileToDelete);
-        //        file.Delete();
-        //        var uploadPath = Path.Combine(_webHostEnvironment.WebRootPath, "file");
-        //        var filePath = Path.Combine(uploadPath, formFile.FileName);
-        //        using (FileStream fs = System.IO.File.Create(filePath))
-        //        {
-        //            formFile.CopyTo(fs);
-        //            fs.Flush();
-        //        }
-        //    }
+        [HttpPut]
+        [Route("suatep")]
+        public async Task<IActionResult> PutTep(int id, [FromForm] Tep tep, IFormFile formFile)
+        {
+            if (id != tep.Id)
+            {
+                return BadRequest();
+            }
+            if (formFile != null)
+            {
+                var data = await _context.Tep.FindAsync(id);
+                var name = data.TenTep;
+                var fileToDelete = Path.Combine(_webHostEnvironment.WebRootPath, "file", name);
+                FileInfo file = new FileInfo(fileToDelete);
+                file.Delete();
+                var uploadPath = Path.Combine(_webHostEnvironment.WebRootPath, "file");
+                var filePath = Path.Combine(uploadPath, formFile.FileName);
+                using (FileStream fs = System.IO.File.Create(filePath))
+                {
+                    formFile.CopyTo(fs);
+                    fs.Flush();
+                }
+            }
 
-        //    tep.TheLoai = Path.GetExtension(formFile.FileName);
-        //    tep.TenTep = formFile.FileName;
-        //    tep.KichThuoc = Convert.ToInt32(formFile.Length);
-        //    tep.NgaySuaCuoi = DateTime.Now;
-        //    tep.NguoiChinhSua = 1;
-        //    _context.Entry(tep).State = EntityState.Modified;
+            tep.TheLoai = Path.GetExtension(formFile.FileName);
+            tep.TenTep = formFile.FileName;
+            tep.KichThuoc = Convert.ToInt32(formFile.Length);
+            tep.NgaySuaCuoi = DateTime.Now;
+            tep.NguoiChinhSua = 1;
+            _context.Entry(tep).State = EntityState.Modified;
 
 
-        //    try
-        //    {
-        //        await _context.SaveChangesAsync();
-        //    }
-        //    catch (DbUpdateConcurrencyException)
-        //    {
-        //        if (!TepExists(id))
-        //        {
-        //            return NotFound();
-        //        }
-        //        else
-        //        {
-        //            throw;
-        //        }
-        //    }
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!TepExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
 
-        //    return NoContent();
-        //}
+            return NoContent();
+        }
 
 
 
@@ -181,6 +181,7 @@ namespace Elibery.Areas.API.Controllers
             return File(memory, GetContentType(path), Path.GetFileName(path));
 
         }
+
         [HttpPut]
         [Route("renamefile")]
         public async Task<IActionResult> reNameFile(int id, string tenFileMoi)

@@ -5,7 +5,7 @@ using Elibery.Data;
 
 namespace Elibery.Areas.API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     public class BaiGiangsController : ControllerBase
     {
@@ -19,7 +19,7 @@ namespace Elibery.Areas.API.Controllers
 
         // GET: api/BaiGiangs
         [HttpGet]
-        [Route("xembaigiang")]
+        [Route("/xembaigiang")]
         public async Task<ActionResult<IEnumerable<BaiGiang>>> GetBaiGiang()
         {
           if (_context.BaiGiang == null)
@@ -29,7 +29,7 @@ namespace Elibery.Areas.API.Controllers
           return await _context.BaiGiang.ToListAsync();
         }
         [HttpGet]
-        [Route("locbaigiang/{monhoc}")]
+        [Route("/locbaigiang/{monhoc}")]
         public async Task<ActionResult<IEnumerable<BaiGiang>>> LocBaiGiang(int monhoc)
         {
             var result = await _context.BaiGiang.ToListAsync();
@@ -92,7 +92,7 @@ namespace Elibery.Areas.API.Controllers
         // POST: api/BaiGiangs
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        [Route("thembaigiang")]
+        [Route("/thembaigiang")]
         public async Task<ActionResult> PostBaiGiang(string tenbaigiang, int idmh, IFormFile formFile)
         {
             BaiGiang baiGiang = new BaiGiang();

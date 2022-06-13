@@ -82,7 +82,7 @@ namespace Elibery.Areas.API.Controllers
                 Email = model.Email,
                 SecurityStamp = Guid.NewGuid().ToString(),
                 UserName = model.Username,
-                PhoneNumber = model.phone
+                PhoneNumber= model.phone
             };
             var result = await userManager.CreateAsync(user, model.Password);
             if (!result.Succeeded)
